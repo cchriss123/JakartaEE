@@ -4,7 +4,10 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="primary">
-        <jta-data-source>java:/mysql</jta-data-source>
-
+        <jta-data-source>java:/MySqlDS</jta-data-source>
+        <class>com.example.jakartazee.Album</class>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
     </persistence-unit>
 </persistence>
