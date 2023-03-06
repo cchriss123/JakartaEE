@@ -8,6 +8,18 @@ import jakarta.ws.rs.ext.Provider;
 public class IdNotFoundExceptionMapper implements ExceptionMapper<IdNotFoundException> {
     @Override
     public Response toResponse(IdNotFoundException e) {
-        return Response.status(404).entity(e.getMessage()).build();
+        String html = "<!DOCTYPE html>"
+                + "<html lang=\"en\">"
+                + "<head>"
+                + "<meta charset=\"UTF-8\">"
+                + "<title>404 Not Found</title>"
+                + "<img alt=\"Cat hiding in a box\" src=\"https://httpcats.com/404.jpg\" width=\"200\" height=\"200\"/>"
+                + "</head>"
+                + "<body>"
+                + "<p>" + e.getMessage() + "</p>"
+                + "</body>"
+                + "</html>";
+        return Response.status(404).entity(html).build();
+        //return Response.status(404).entity(e.getMessage()).build();
     }
 }
