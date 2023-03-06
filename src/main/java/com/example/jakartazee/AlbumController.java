@@ -21,9 +21,7 @@ public class AlbumController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<AlbumDto> getAll(@QueryParam("name") String name) {
-        if (name == null)
-            return mapper.map(repository.findAll());
-        return mapper.map(repository.findAllByName(name));
+        return name == null ? mapper.map(repository.findAll()) : mapper.map(repository.findAllByName(name));
     }
 
     @GET
@@ -48,12 +46,12 @@ public class AlbumController {
     }
 
 
+
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") Long id, AlbumDto albumDto) {
-        return Response.ok().entity(mapper.map(repository.update(id, mapper.map(albumDto)))).build();
+        return Response.ok().entity(mapper.map(repository.update(id, albumDto))).build();
     }
-
 }

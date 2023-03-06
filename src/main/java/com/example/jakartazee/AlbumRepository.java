@@ -32,18 +32,17 @@ public class AlbumRepository {
         return query.getResultList();
     }
 
-    public Album update(Long id, Album album){
+    public Album update(Long id, AlbumDto albumDto){
         var entity = entityManager.find(Album.class, id);
-        entity.setName(album.getName());
-        entity.setArtist(album.getArtist());
-        entity.setPrice(album.getPrice());
+        entity.setName(albumDto.getName() != null ? albumDto.getName() : entity.getName());
+        entity.setArtist(albumDto.getArtist() != null ? albumDto.getArtist() : entity.getArtist());
+        entity.setPrice(albumDto.getPrice() != null ? albumDto.getPrice() : entity.getPrice());
         entityManager.persist(entity);
         return entity;
     }
 
-    public void deleteAlbum(Long id){
-        var album = findOne(id);
-        album.ifPresent((a)-> entityManager.remove(a));
 
+    public void deleteAlbum(Long id) {
+        findOne(id).ifPresent(a -> entityManager.remove(a));
     }
 }
